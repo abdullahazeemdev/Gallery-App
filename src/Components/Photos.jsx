@@ -1,48 +1,37 @@
 import React from "react";
 
-const Gallery = ({data}) => {
+const Gallery = ({ data, setSelectedImage }) => {
   return (
-    <div className="group w-full overflow-hidden rounded-2xl border border-white/10 bg-[#151e2e] shadow-lg transition-all duration-300 hover:-translate-y-2 hover:border-indigo-400/30 hover:shadow-2xl hover:shadow-indigo-500/10">
+    <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] shadow-lg">
 
-      {/* Image */}
       <div className="relative overflow-hidden">
+
+        {/* image */}
         <img
-          className="h-60 w-full object-cover transition duration-500 group-hover:scale-110"
           src={data.download_url}
           alt={data.author}
+          className="h-64 w-full object-cover"
         />
 
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 transition duration-300 group-hover:opacity-100"></div>
-
-        {/* View Button */}
-        <button className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-xl border border-white/20 bg-black/30 text-white opacity-0 backdrop-blur-md transition duration-300 group-hover:opacity-100 hover:bg-indigo-500 cursor-pointer">
+        {/* zoom */}
+        <button
+          onClick={() => setSelectedImage(data)}
+          className="absolute right-3 top-3 flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl bg-black/50 text-white backdrop-blur-md transition hover:bg-indigo-500"
+        >
           <i className="fa-solid fa-expand text-sm"></i>
         </button>
+
       </div>
 
-      {/* Content */}
-      <div className="p-5">
+      {/* card info */}
+      <div className="p-4">
+        <p className="text-sm font-medium text-white">
+          {data.author}
+        </p>
 
-        <div className="flex items-center justify-between gap-3">
-
-          <div>
-            <h2 className="text-lg font-semibold text-white">
-              {data.author}
-            </h2>
-
-            <p className="mt-1 text-sm text-slate-400">
-              Beautiful gallery image
-            </p>
-          </div>
-
-          {/* Icon */}
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-indigo-500/10 text-indigo-400 ">
-            <i className="fa-regular fa-image text-sm"> </i>
-          </div>
-
-        </div>
-
+        <p className="mt-1 text-xs text-slate-400 ">
+          Photo ID : <span className="font-bold">{data.id}</span> 
+        </p>
       </div>
 
     </div>
